@@ -93,7 +93,7 @@
                     <label for="mixolydian">Mixolydian</label>
                 </div>
                 <div class="field">
-                    <input type="checkbox" id="aeolian" name="Aeolian" checked>
+                    <input type="checkbox" id="aeolian" name="Aeolian" onchange="toggleMinorVariations()" checked>
                     <label for="aeolian">Aeolian (natural minor)</label>
                 </div>
                 <div class="field">
@@ -151,8 +151,7 @@
 
                 if (tonic.endsWith('#')) {
                     tonic = tonic.replace('#', '&#9839;');
-                }
-                else if (tonic.endsWith('b')) {
+                } else if (tonic.endsWith('b')) {
                     tonic = tonic.replace('b', '&#9837;');
                 }
 
@@ -160,8 +159,7 @@
 
                 if (mode == 'Ionian') {
                     mode += ' (major)';
-                }
-                else if (mode == 'Aeolian') {
+                } else if (mode == 'Aeolian') {
                     var minorVariationOptions = [];
 
                     fields = document.getElementById("minor-variations").getElementsByTagName("input");
@@ -175,6 +173,14 @@
                 }
 
                 document.getElementById("result").innerHTML = tonic + ' ' + mode;
+            }
+
+            function toggleMinorVariations() {
+                if (document.getElementById("aeolian").checked) {
+                    document.getElementById("minor-variations").hidden = false;
+                } else {
+                    document.getElementById("minor-variations").hidden = true;
+                }
             }
         </script>
     </body>
