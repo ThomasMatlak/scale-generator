@@ -67,6 +67,11 @@
                     <input type="checkbox" id="B" name="B" checked>
                     <label for="B">B</label>
                 </div>
+
+                <div>
+                    <button type="button" id="tonic-selectall" onclick="selectAll('tonic')">Select All</button>
+                    <button type="button" id="tonic-deselectall" onclick="deselectAll('tonic')">Deselect All</button>
+                </div>
             </fieldset>
 
             <fieldset id="mode">
@@ -100,10 +105,15 @@
                     <input type="checkbox" id="locrian" name="Locrian">
                     <label for="locrian">Locrian</label>
                 </div>
+
+                <div>
+                    <button type="button" id="mode-selectall" onclick="selectAll('mode')">Select All</button>
+                    <button type="button" id="mode-deselectall" onclick="deselectAll('mode')">Deselect All</button>
+                </div>
             </fieldset>
 
             <fieldset id="minor-variations">
-                <legend>Minor Scale Variations (if applicable)</legend>
+                <legend>Minor Scale Variations</legend>
 
                 <div class="field">
                     <input type="checkbox" id="natural" name="Natural" checked>
@@ -125,6 +135,20 @@
         <h1 id="result"></h1>
 
         <script>
+            function selectAll(fieldset) {
+                var fields = document.getElementById(fieldset).getElementsByTagName("input");
+                for (var i = 0; i < fields.length; ++i) {
+                    fields[i].checked = true;
+                }
+            }
+
+            function deselectAll(fieldset) {
+                var fields = document.getElementById(fieldset).getElementsByTagName("input");
+                for (var i = 0; i < fields.length; ++i) {
+                    fields[i].checked = false;
+                }
+            }
+
             function randomArrayItem(arr) {
                 return arr[Math.floor(Math.random() * arr.length)];
             }
@@ -169,7 +193,7 @@
                         }
                     }
 
-                    mode = randomArrayItem(minorVariationOptions) + ' Minor'
+                    mode = randomArrayItem(minorVariationOptions) + ' Minor';
                 }
 
                 document.getElementById("result").innerHTML = tonic + ' ' + mode;
